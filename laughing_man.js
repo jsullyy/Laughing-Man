@@ -78,7 +78,7 @@ function moveSquare(element){
 }
 
 function getRandomColor(){
-    //Make a Color ->
+    //Make a Color
     let letters = "0123456789ABCDEF";
     let color = "#";
 
@@ -90,7 +90,7 @@ function getRandomColor(){
 }
 
 function changeColors(){
-    let allSquares = document.querySelectorAll(".square");
+    let allSquares = document.querySelectorAll(".square, #square");
 
     for(let i = 0; i < allSquares.length; i++){
         allSquares[i].style.backgroundColor = getRandomColor();
