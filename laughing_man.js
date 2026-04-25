@@ -7,6 +7,7 @@ let zIndexCounter = 1;
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#square").addEventListener("click", () => {
         alert("OMG YOU CLICKED ME!");
+        squareClick(document.querySelector("#square"));
     });
 
     box = document.querySelector("#box");
@@ -36,12 +37,7 @@ function addSquare(){
     square.style.top = parseInt(Math.random() * 350) + "px";
 
     square.onclick = function(){
-        if(parseInt(square.style.zIndex) == zIndexCounter){
-            square.remove();
-        } else {
-            zIndexCounter++;
-            square.style.zIndex = zIndexCounter;
-        }
+        squareClick(square);
     };
 
     box.appendChild(square);
@@ -87,6 +83,15 @@ function getRandomColor(){
     }
 
     return color; //return that string
+}
+
+function squareClick(square){
+    if(parseInt(square.style.zIndex) == zIndexCounter){
+        square.remove();
+    } else {
+        zIndexCounter++;
+        square.style.zIndex = zIndexCounter;
+    }
 }
 
 function changeColors(){
