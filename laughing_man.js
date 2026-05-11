@@ -1,60 +1,39 @@
-let squareArea = document.querySelector("#squarearea");
-//let squareArea = document.getElementById("squarearea");
-let squareCount = parseInt(Math.random()*21)+30; //30-50
-//Make some variable for zindex
-let zIndexCounter = 1;
+const SQUARE_COUNT = 3;
 
-window.onload = function() {
-    squareArea = document.querySelector("#squarearea");
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector("#square").addEventListener("click", () => {
+        alert("OMG YOU CLICKED ME!");
+    });
 
-    for(let i =0; i < squareCount; i++){
-        addSquare();
+    let box = document.querySelector("#box");
+
+    document.querySelector("#square").addEventListener("mouseover", () => {
+        document.querySelector("#square").style.backgroundColor = getColor();
+    });
+
+    for (let i = 0; i < SQUARE_COUNT; i++) {
+        let square = document.createElement("img");
+
+        square.src = "laughing_man.png";
+        square.alt = "Catch the Laughing Man!";
+        square.className = "square";
+
+        square.style.left = Math.random() * 450 + "px";
+        square.style.top = Math.random() * 350 + "px";
+
+        square.addEventListener("mouseover", () => {
+            square.src = "Orochimaru.jpg";
+        });
+        square.addEventListener("mouseout", () => {
+            square.src = "laughing_man.jpg";
+        });
+
+        box.appendChild(square);
     }
-};
+});
 
-function addSquare(){ //function to add another square
-    let square = document.createElement("div");
-    square.className = "square";
-
-    let size = parseInt(Math.random()*11)+45;
-    square.style.width = size + "px";
-    square.style.height = size + "px";
-
-    square.style.left = parseInt(Math.random()*(squareArea.clientWidth - size))+"px";
-    square.style.top = parseInt(Math.random()*(squareArea.clientHeight - size))+"px";
-
-    square.style.backgroundColor = getRandomColor();
-
-    //I can put a onclick and a function(this)
-    square.onclick = function(){
-        if(square.style.zIndex == zIndexCounter){
-            square.remove();
-        }else {
-            zIndexCounter++;
-            square.style.zIndex = zIndexCounter;
-        }
-    };
-
-    //put it on the screen
-    squareArea.append(square);
-}
-
-function getRandomColor(){
-    //Make a Color ->
-    let letters = "0123456789ABCDEF";
-    let color = "#";
-
-    for(let i =0; i<6; i++){
-        color+=letters.charAt(parseInt(Math.random()*letters.length));
-    }
-
-    return color; //return that string
-}
-
-function changeColor(){ //function to change color of squares
-    let allSquares = document.querySelectorAll(".square");
-
-    for(let i = 0; i < allSquares.length; i++){ //for loop to change color of squares
-        allSquares[i].style.backgroundColor = getRandomColor();
-    }
+function getColor() {
+    let colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+    let randomNumber = Math.floor(Math.random() * colors.length);
+    return colors[randomNumber];
 }
